@@ -1,0 +1,10 @@
+{
+    "Pikachu": {
+        "name": "Pikachu",
+        "hp": 35,
+        "level": 5,
+        "attack_power": 55,
+        "defense": 40,
+        "type": "Electric"
+    }
+}
