@@ -30,3 +30,10 @@ class Combat:
         pokedex = []
         pokedex.append(pokemon)
         print(f"{pokemon.name} a été ajouté à votre Pokédex!")
+        
+    def get_opponent_attack_power(self, opponent):
+        opponent_type = opponent.type
+        opponent_attack_power = opponent.attack_power
+        attacker_type = self.attacker.type
+        damage_multiplier = self.get_damage_multiplier(attacker_type, opponent_type)
+        return opponent_attack_power * damage_multiplier
