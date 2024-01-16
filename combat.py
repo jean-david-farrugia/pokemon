@@ -50,8 +50,3 @@ class Combat:
         damage_multiplier = self.get_damage_multiplier(self.attacker.type, self.defender.type)
         # Retourne la puissance d'attaque de l'adversaire, multipliée par le multiplicateur de dégâts
         return self.defender.puissance_attaque * damage_multiplier
-
-        
-    def get_opponent_attack_power(self):
-        damage_multiplier = self.get_damage_multiplier(self.attacker.type, self.defender.type)
-        return self.defender.puissance_attaque * damage_multiplier
