@@ -1,0 +1,368 @@
+[
+    {
+        "name": "pikachu",
+        "moves": [
+            {
+                "name": "thunder-shock",
+                "power": 20
+            },
+            {
+                "name": "quick-attack",
+                "power": 10
+            },
+            {
+                "name": "electro-ball",
+                "power": 15
+            }
+        ],
+        "past_values": [],
+        "stat_changes": [],
+        "super_contest_effect": {},
+        "selected_pokemon": {
+            "name": "pikachu"
+        },
+        "type": {
+            "name": "electric"
+        },
+        "pokemon": {
+            "name": "pikachu"
+        },
+        "stats": [
+            {
+                "stat": {
+                    "name": "hp"
+                },
+                "base_stat": 35
+            },
+            {
+                "stat": {
+                    "name": "attack"
+                },
+                "base_stat": 55
+            },
+            {
+                "stat": {
+                    "name": "defense"
+                },
+                "base_stat": 40
+            },
+            {
+                "stat": {
+                    "name": "speed"
+                },
+                "base_stat": 90
+            }
+        ],
+        "types": [
+            {
+                "type": {
+                    "name": "electric"
+                }
+            }
+        ],
+        "sprites": {
+            "front_default": "pikachu.png",
+            "back_default": "pikachu_back.png"
+        }
+    },
+    {
+        "name": "bulbisar",
+        "moves": [
+            {
+                "name": "tackle",
+                "power": 10
+            },
+            {
+                "name": "vine-whip",
+                "power": 15
+            },
+            {
+                "name": "razor-leaf",
+                "power": 20
+            }
+        ],
+        "use_after": null,
+        "use_before": null,
+        "contest_type": {
+            "name": "tough"
+        },
+        "contest_effect": {},
+        "move_damage_class": {
+            "name": "physical"
+        },
+        "effect": "Inflicts regular damage with no additional effect.",
+        "short_effect": "Inflicts regular damage with no additional effect.",
+        "language": {
+            "name": "en"
+        },
+        "effect_changes": {
+            "generation": {
+                "name": "generation-i"
+            },
+            "move_name": "Vine Whip",
+            "language": {
+                "name": "en"
+            }
+        },
+        "past_values": [],
+        "stat_changes": [],
+        "super_contest_effect": {},
+        "selected_pokemon": {
+            "name": "bulbisar"
+        },
+        "type": {
+            "name": "grass"
+        },
+        "pokemon": {
+            "name": "bulbisar"
+        },
+        "flavor_text": "The target is struck with slender, whiplike vines to inflict damage.",
+        "language_flavor_text": {
+            "name": "en"
+        },
+        "version_group": {
+            "name": "gold-silver"
+        },
+        "stats": [
+            {
+                "stat": {
+                    "name": "hp"
+                },
+                "base_stat": 45
+            },
+            {
+                "stat": {
+                    "name": "attack"
+                },
+                "base_stat": 49
+            },
+            {
+                "stat": {
+                    "name": "defense"
+                },
+                "base_stat": 49
+            },
+            {
+                "stat": {
+                    "name": "speed"
+                },
+                "base_stat": 45
+            }
+        ],
+        "types": [
+            {
+                "type": {
+                    "name": "grass"
+                }
+            }
+        ],
+        "sprites": {
+            "front_default": "bulbusar.png",
+            "back_default": "bulbusar_back.png"
+        }
+    },
+    {
+        "id": 3,
+        "name": "salameche",
+        "accuracy": 100,
+        "effect_chance": null,
+        "pp": 35,
+        "priority": 0,
+        "moves": [
+            {
+                "name": "scratch",
+                "power": 10
+            },
+            {
+                "name": "ember",
+                "power": 20
+            },
+            {
+                "name": "flame-burst",
+                "power": 25
+            }
+        ],
+        "use_after": null,
+        "use_before": null,
+        "contest_type": {
+            "name": "cool"
+        },
+        "contest_effect": {},
+        "move_damage_class": {
+            "name": "special"
+        },
+        "effect": "Inflicts regular damage with no additional effect.",
+        "short_effect": "Inflicts regular damage with no additional effect.",
+        "language": {
+            "name": "en"
+        },
+        "effect_changes": {
+            "generation": {
+                "name": "generation-i"
+            },
+            "move_name": "Ember",
+            "language": {
+                "name": "en"
+            }
+        },
+        "past_values": [],
+        "stat_changes": [],
+        "super_contest_effect": {},
+        "selected_pokemon": {
+            "name": "salameche"
+        },
+        "type": {
+            "name": "fire"
+        },
+        "pokemon": {
+            "name": "salameche"
+        },
+        "flavor_text": "The target is attacked with small flames.",
+        "language_flavor_text": {
+            "name": "en"
+        },
+        "version_group": {
+            "name": "gold-silver"
+        },
+        "stats": [
+            {
+                "stat": {
+                    "name": "hp"
+                },
+                "base_stat": 35
+            },
+            {
+                "stat": {
+                    "name": "attack"
+                },
+                "base_stat": 55
+            },
+            {
+                "stat": {
+                    "name": "defense"
+                },
+                "base_stat": 40
+            },
+            {
+                "stat": {
+                    "name": "speed"
+                },
+                "base_stat": 90
+            }
+        ],
+        "types": [
+            {
+                "type": {
+                    "name": "feu"
+                }
+            }
+        ],
+        "sprites": {
+            "front_default": "salameche.png",
+            "back_default": "salameche_back.png"
+        }
+    },
+    {
+        "id": 4,
+        "name": "charizard",
+        "accuracy": 100,
+        "pp": 35,
+        "priority": 0,
+        "moves": [
+            {
+                "name": "flamethrower",
+                "power": 90
+            },
+            {
+                "name": "fly",
+                "power": 90
+            },
+            {
+                "name": "slash",
+                "power": 90
+            },
+            {
+                "name": "dragon claw",
+                "power": 90
+            }
+        ],
+        "contest_type": {
+            "name": "cool"
+        },
+        "move_damage_class": {
+            "name": "special"
+        },
+        "effect": "Inflicts regular damage with no additional effect.",
+        "short_effect": "Inflicts regular damage with no additional effect.",
+        "language": {
+            "name": "en"
+        },
+        "effect_changes": {
+            "generation": {
+                "name": "generation-i"
+            },
+            "move_name": "Flamethrower",
+            "language": {
+                "name": "en"
+            }
+        },
+        "selected_pokemon": {
+            "name": "charizard"
+        },
+        "type": {
+            "name": "fire"
+        },
+        "pokemon": {
+            "name": "charizard"
+        },
+        "flavor_text": "The target is scorched with an intense blast of fire.",
+        "language_flavor_text": {
+            "name": "en"
+        },
+        "version_group": {
+            "name": "gold-silver"
+        },
+        "stats": [
+            {
+                "stat": {
+                    "name": "hp"
+                },
+                "base_stat": 78
+            },
+            {
+                "stat": {
+                    "name": "attack"
+                },
+                "base_stat": 84
+            },
+            {
+                "stat": {
+                    "name": "defense"
+                },
+                "base_stat": 78
+            },
+            {
+                "stat": {
+                    "name": "speed"
+                },
+                "base_stat": 100
+            }
+        ],
+        "types": [
+            {
+                "type": {
+                    "name": "fire"
+                }
+            },
+            {
+                "type": {
+                    "name": "flying"
+                }
+            }
+        ],
+        "sprites": {
+            "front_default": "charizard.png",
+            "back_default": "charizard_back.png"
+        }
+    }
+]
