@@ -3,6 +3,7 @@ from pygame.locals import *
 import time
 import random
 from pokemon import Pokemon
+from combat import Combat
 import sys
 
 pygame.init()
@@ -85,6 +86,9 @@ salameche = Pokemon('pokemon.json', 2, level, 325, 15)
 chirazard = Pokemon('pokemon.json', 3, level, 25, 200)
 carapuce = Pokemon('pokemon.json', 4, level, 175, 200)
 pokemons = [bulbisar, pikachu, salameche, chirazard, carapuce]
+
+
+
 
 for pokemon in pokemons:
     pokemon.set_game(game)
