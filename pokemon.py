@@ -1,8 +1,19 @@
 import json
 import pygame
 from pygame import*
-from urllib.request import urlopen
-import io
+import math
+import time
+
+
+green = (0,200,0)
+red = (200,0,0)
+black = (0,0,0)
+
+class Move:
+    def __init__(self, name, power, type):
+        self.name = name
+        self.power = power
+        self.type = type
 
 class Pokemon(pygame.sprite.Sprite):
     
@@ -17,7 +28,6 @@ class Pokemon(pygame.sprite.Sprite):
                 self.json = all_pokemon[index]
         except Exception as e:
             print(f"Error loading Pokemon data: {e}")
-            # You might want to handle the error in a different way
 
         self.name = self.json['name']
         self.level = level
@@ -45,6 +55,46 @@ class Pokemon(pygame.sprite.Sprite):
     def set_game(self, game):
         self.game = game
 
+    def use_potion(self):
+        if self.num_potions > 0:
+
+            self.current_hp += 30
+            if self.current_hp > self.max_hp:
+                self.current_hp = self.max_hp
+
+            self.num_potions -= 1
+
+    def set_moves(self):
+        self.moves = []
+        for move in self.json['moves']:
+            move_name = move['name']
+            move_power = move['power']
+            move_type = self.json['type']['name']  
+            move = Move(move_name, move_power, move_type)
+            self.moves.append(move)
+
+
+    def perform_attack(self, other, move):
+        from main import display_message
+        display_message(f'{self.name} used {move.name}')
+
+        time.sleep(1)
+
+        damage = (2 * self.level + 10) / 250 * self.attack / other.defense * move.power
+    
+        if move.type in self.types:
+            damage *= 1.5
+
+        damage = math.floor(damage)
+
+        other.take_damage(damage)
+
+    def take_damage(self, damage):
+        self.current_hp -= damage
+
+        if self.current_hp < 0:
+            self.current_hp = 0
+
     def set_sprite(self, side):
         try:
             image_path = self.json['sprites'][side]
@@ -56,10 +106,8 @@ class Pokemon(pygame.sprite.Sprite):
             self.image = pygame.transform.scale(self.image, (new_width, new_height))
         except Exception as e:
             print(f"Error loading image for {self.name}: {e}")
-            # You might want to set a default image or handle the error in another way
 
     def update(self):
-        # Add any update logic or animations here
         pass
 
     def draw(self, alpha=255):
@@ -67,6 +115,26 @@ class Pokemon(pygame.sprite.Sprite):
         transparency = (255, 255, 255, alpha)
         sprite.fill(transparency, None, pygame.BLEND_RGBA_MULT)
         self.game.blit(sprite, (self.x, self.y))
+
+
+    def draw_hp (self):
+        bar_scale = 200 // self.max_hp
+        for i in range(self.max_hp):
+            bar = (self.hp_x + bar_scale * i, self.hp_y, bar_scale, 20)
+            pygame.draw.rect(self.game, red, bar)
+
+        for i in range(self.current_hp):
+            bar = (self.hp_x + bar_scale * i, self.hp_y, bar_scale, 20)
+            pygame.draw.rect(self.game, green, bar)
+
+        font = pygame.font.Font(pygame.font.get_default_font(), 16)
+        text = font.render(f'HP: {self.current_hp} / {self.max_hp}', True, black)
+        text_rect = text.get_rect()
+        text_rect.x = self.hp_x
+        text_rect.y = self.hp_y + 30
+        self.game.blit(text, text_rect)
+
+
 
     def get_rect(self):
 
