@@ -83,7 +83,8 @@ bulbisar = Pokemon('pokemon.json', 1, level, 25, 15)
 pikachu = Pokemon('pokemon.json', 0, level, 175, 15)
 salameche = Pokemon('pokemon.json', 2, level, 325, 15)
 chirazard = Pokemon('pokemon.json', 3, level, 25, 200)
-pokemons = [bulbisar, pikachu, salameche, chirazard]
+carapuce = Pokemon('pokemon.json', 4, level, 175, 200)
+pokemons = [bulbisar, pikachu, salameche, chirazard, carapuce]
 
 for pokemon in pokemons:
     pokemon.set_game(game)
@@ -167,6 +168,7 @@ while game_status != 'quit':
         bulbisar.draw()
         salameche.draw()
         chirazard.draw()
+        carapuce.draw()
 
         mouse_cursor = pygame.mouse.get_pos()
         for pokemon in pokemons:
@@ -280,7 +282,8 @@ while game_status != 'quit':
 
         if hasattr(rival_pokemon, 'moves') and rival_pokemon.moves:
             move = random.choice(rival_pokemon.moves)
-            rival_pokemon.perform_attack(player_pokemon, move)
+            damage = rival_pokemon.calculate_damage(player_pokemon.types, move.power)
+            player_pokemon.take_damage(damage)
 
         if player_pokemon.current_hp == 0:
             game_status = 'fainted'
