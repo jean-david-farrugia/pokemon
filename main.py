@@ -53,6 +53,8 @@ def create_button(width, heigth, left, top, text_cx, text_cy, label):
 
 def display_menu():
     background = pygame.image.load("background.jpg")
+    background_size = (500, 500)
+    background = pygame.transform.scale(background, background_size)
     while True:
         game.blit(background,(0,0))
         font = pygame.font.Font(pygame.font.get_default_font(), 32)
@@ -74,11 +76,14 @@ def display_menu():
                     pygame.quit()
                     sys.exit()
 
+
+
 level = 30
-bulbisar = Pokemon('pokemon.json', 1, level, 25, 150)
-pikachu = Pokemon('pokemon.json', 0, level, 175, 150)
-salameche = Pokemon('pokemon.json', 2, level, 325, 150)
-pokemons = [bulbisar, pikachu, salameche]
+bulbisar = Pokemon('pokemon.json', 1, level, 25, 15)
+pikachu = Pokemon('pokemon.json', 0, level, 175, 15)
+salameche = Pokemon('pokemon.json', 2, level, 325, 15)
+chirazard = Pokemon('pokemon.json', 3, level, 25, 200)
+pokemons = [bulbisar, pikachu, salameche, chirazard]
 
 for pokemon in pokemons:
     pokemon.set_game(game)
@@ -98,6 +103,7 @@ while game_status != 'quit':
         if event.type == MOUSEBUTTONDOWN:
 
             mouse_click = event.pos
+        
 
             if game_status == 'menu':
                 play_game = display_menu()
@@ -153,12 +159,14 @@ while game_status != 'quit':
                     game_status = 'rival turn'
             else:
                 print("Invalid move index.")
+
     if game_status == 'select pokemon':
         game.fill(white)
 
         pikachu.draw()
         bulbisar.draw()
         salameche.draw()
+        chirazard.draw()
 
         mouse_cursor = pygame.mouse.get_pos()
         for pokemon in pokemons:
@@ -290,9 +298,17 @@ while game_status != 'quit':
         if rival_pokemon.current_hp == 0:
             player_pokemon.draw()
             rival_pokemon.draw()
-            display_message(f'{rival_pokemon.name}fainted!')
+            display_message(f'{rival_pokemon.name} as fainted!')
         else:
-            display_message(f'{player_pokemon.name}fainted!')
+            display_message(f'{player_pokemon.name} as fainted!')
+
+        for pokemon in pokemons:
+            pokemon.reset_hp()
+
+        game_status = 'game over'
+
+    if game_status == 'game over':
+        game_status = 'menu'
             
 
         pygame.display.update()
