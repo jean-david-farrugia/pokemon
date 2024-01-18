@@ -3,6 +3,7 @@ import pygame
 from pygame import*
 import math
 import time
+from combat import Combat
 
 
 green = (0,200,0)
@@ -15,7 +16,7 @@ class Move:
         self.power = power
         self.type = type
 
-class Pokemon(pygame.sprite.Sprite):
+class Pokemon(pygame.sprite.Sprite, Combat):
     
     def __init__(self, data_file, index, level, x, y):
         pygame.sprite.Sprite.__init__(self)
@@ -65,48 +66,6 @@ class Pokemon(pygame.sprite.Sprite):
 
             self.num_potions -= 1
 
-    def set_moves(self):
-        self.moves = []
-        for move in self.json['moves']:
-            move_name = move['name']
-            move_power = move['power']
-            move_type = self.json['type']['name']  
-            move = Move(move_name, move_power, move_type)
-            self.moves.append(move)
-
-    TYPE_EFFECTIVENESS = {
-    'water': {'water': 1, 'fire': 2, 'earth': 0.5, 'normal': 1, 'electric': 1, 'grass': 0.5},
-    'fire': {'water': 0.5, 'fire': 1, 'earth': 2, 'normal': 1, 'electric': 1, 'grass': 2},
-    'earth': {'water': 2, 'fire': 0.5, 'earth': 1, 'normal': 1, 'electric': 0.5, 'grass': 2},
-    'normal': {'water': 0.75, 'fire': 0.75, 'earth': 0.75, 'normal': 1, 'electric': 1, 'grass': 1},
-    'electric': {'water': 2, 'fire': 1, 'earth': 0.5, 'normal': 1, 'electric': 1, 'grass': 1},
-    'grass': {'water': 2, 'fire': 0.5, 'earth': 2, 'normal': 1, 'electric': 1, 'grass': 1}
-}
-
-    def calculate_damage(self, opponent_type, attack_power):
-        effectiveness = self.TYPE_EFFECTIVENESS[self.types[0]][opponent_type[0]]
-        return attack_power * effectiveness
-
-    def perform_attack(self, other, move):
-        from main import display_message
-        display_message(f'{self.name} used {move.name}')
-
-        time.sleep(1)
-
-        damage = (2 * self.level + 10) / 250 * self.attack / other.defense * move.power
-    
-        if move.type in self.types:
-            damage *= 1.5
-
-        damage = math.floor(damage)
-
-        other.take_damage(damage)
-
-    def take_damage(self, damage):
-        self.current_hp -= damage
-
-        if self.current_hp < 0:
-            self.current_hp = 0
 
     def reset_hp(self):
         self.current_hp = self.max_hp
