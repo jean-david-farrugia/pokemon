@@ -271,19 +271,19 @@
         "moves": [
             {
                 "name": "flamethrower",
-                "power": 90
+                "power": 30
             },
             {
                 "name": "fly",
-                "power": 90
+                "power": 25
             },
             {
                 "name": "slash",
-                "power": 90
+                "power": 15
             },
             {
                 "name": "dragon claw",
-                "power": 90
+                "power": 20
             }
         ],
         "contest_type": {
