@@ -35,7 +35,8 @@ class Pokemon(pygame.sprite.Sprite):
         self.y = y
         self.game = None
         self.num_potions = 3
-
+        
+    
         stats = self.json['stats']
         for stat in stats:
             if stat['stat']['name'] == 'hp':
@@ -73,6 +74,18 @@ class Pokemon(pygame.sprite.Sprite):
             move = Move(move_name, move_power, move_type)
             self.moves.append(move)
 
+    TYPE_EFFECTIVENESS = {
+    'water': {'water': 1, 'fire': 2, 'earth': 0.5, 'normal': 1, 'electric': 1, 'grass': 0.5},
+    'fire': {'water': 0.5, 'fire': 1, 'earth': 2, 'normal': 1, 'electric': 1, 'grass': 2},
+    'earth': {'water': 2, 'fire': 0.5, 'earth': 1, 'normal': 1, 'electric': 0.5, 'grass': 2},
+    'normal': {'water': 0.75, 'fire': 0.75, 'earth': 0.75, 'normal': 1, 'electric': 1, 'grass': 1},
+    'electric': {'water': 2, 'fire': 1, 'earth': 0.5, 'normal': 1, 'electric': 1, 'grass': 1},
+    'grass': {'water': 2, 'fire': 0.5, 'earth': 2, 'normal': 1, 'electric': 1, 'grass': 1}
+}
+
+    def calculate_damage(self, opponent_type, attack_power):
+        effectiveness = self.TYPE_EFFECTIVENESS[self.types[0]][opponent_type[0]]
+        return attack_power * effectiveness
 
     def perform_attack(self, other, move):
         from main import display_message
@@ -94,6 +107,9 @@ class Pokemon(pygame.sprite.Sprite):
 
         if self.current_hp < 0:
             self.current_hp = 0
+
+    def reset_hp(self):
+        self.current_hp = self.max_hp
 
     def set_sprite(self, side):
         try:
@@ -123,7 +139,7 @@ class Pokemon(pygame.sprite.Sprite):
             bar = (self.hp_x + bar_scale * i, self.hp_y, bar_scale, 20)
             pygame.draw.rect(self.game, red, bar)
 
-        for i in range(self.current_hp):
+        for i in range(int(self.current_hp)):
             bar = (self.hp_x + bar_scale * i, self.hp_y, bar_scale, 20)
             pygame.draw.rect(self.game, green, bar)
 
