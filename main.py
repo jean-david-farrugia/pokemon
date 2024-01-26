@@ -4,6 +4,7 @@ import time
 import random
 from pokemon import Pokemon
 from combat import Combat
+from pokedex import Pokedex
 import sys
 
 pygame.init()
@@ -60,8 +61,9 @@ def display_menu():
         game.blit(background,(0,0))
         font = pygame.font.Font(pygame.font.get_default_font(), 32)
 
-        play_button = create_button(200, 80, 150, 150, 250, 190, 'Play')
-        quit_button = create_button(200, 80, 150, 300, 250, 340, 'Quit')
+        play_button = create_button(200, 80, 150, 100, 250, 150, 'Play')
+        pokedex_button = create_button(200, 80, 150, 200, 250, 250, 'Pokedex')
+        quit_button = create_button(200, 80, 150, 300, 250, 350, 'Quit')
 
         pygame.display.update()
 
@@ -72,7 +74,9 @@ def display_menu():
             elif event.type == MOUSEBUTTONDOWN:
                 mouse_click = event.pos
                 if play_button.collidepoint(mouse_click):
-                    return True
+                    return 'play'
+                elif pokedex_button.collidepoint(mouse_click):
+                    return 'pokedexb'
                 elif quit_button.collidepoint(mouse_click):
                     pygame.quit()
                     sys.exit()
@@ -80,14 +84,14 @@ def display_menu():
 
 
 level = 30
-bulbisar = Pokemon('pokemon.json', 1, level, 25, 15)
-pikachu = Pokemon('pokemon.json', 0, level, 175, 15)
+bulbisar = Pokemon('pokemon.json', 1, level, 175, 15)
+pikachu = Pokemon('pokemon.json', 0, level, 25, 15)
 salameche = Pokemon('pokemon.json', 2, level, 325, 15)
 chirazard = Pokemon('pokemon.json', 3, level, 25, 200)
 carapuce = Pokemon('pokemon.json', 4, level, 175, 200)
 pokemons = [bulbisar, pikachu, salameche, chirazard, carapuce]
 
-
+pokedex = Pokedex('pokemon.json', 'pokedex.json')
 
 
 for pokemon in pokemons:
@@ -99,26 +103,32 @@ rival_pokemon = None
 move_button = []
 
 game_status = 'menu'
-while game_status != 'quit':
 
+while game_status != 'quit':
     for event in pygame.event.get():
         if event.type == QUIT:
             game_status = 'quit'
 
         if event.type == MOUSEBUTTONDOWN:
-
             mouse_click = event.pos
-        
 
             if game_status == 'menu':
-                play_game = display_menu()
-                if play_game:
+                button_clicked = display_menu()
+                if button_clicked == 'play':
                     game_status = 'select pokemon'
+                elif button_clicked == 'pokedexb':
+                    game_status = 'pokedex'
+            pygame.display.update()
+
+
+            if game_status == 'pokedex':
+                game.fill(white)
+                pokedex.display(game)
+                pygame.display.update()
+                
 
             if game_status == 'select pokemon':
-
                 for i in range(len(pokemons)):
-
                     if pokemons[i].get_rect().collidepoint(mouse_click):
                         player_pokemon = pokemons[i]
                         rival_pokemon = pokemons[:i] + pokemons[i+1:]
@@ -168,7 +178,7 @@ while game_status != 'quit':
     if game_status == 'select pokemon':
         game.fill(white)
 
-        pikachu.draw()
+        pikachu.draw()  
         bulbisar.draw()
         salameche.draw()
         chirazard.draw()
@@ -306,16 +316,23 @@ while game_status != 'quit':
             player_pokemon.draw()
             rival_pokemon.draw()
             display_message(f'{rival_pokemon.name} as fainted!')
+            pokedex.update_rival_data(rival_pokemon.name, f'{rival_pokemon.sprite_path}')
         else:
             display_message(f'{player_pokemon.name} as fainted!')
 
         for pokemon in pokemons:
             pokemon.reset_hp()
+            pokemon.x = pokemon.initial_x
+            pokemon.y = pokemon.initial_y
+            pokemon.set_sprite('front_default')
+            
+            
 
         game_status = 'game over'
 
     if game_status == 'game over':
         game_status = 'menu'
+        pygame.event.clear()
             
 
         pygame.display.update()
